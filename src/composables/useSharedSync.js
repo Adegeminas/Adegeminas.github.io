@@ -6,14 +6,9 @@ function applyThemeToDocument(value) {
   document.documentElement.dataset.theme = value
   try {
     localStorage.setItem(THEME_STORAGE_KEY, value)
-  } catch {
-    /* ignore */
-  }
+  } catch {}
 }
 
-/**
- * Счётчик вкладок и тема через Shared Worker; при отсутствии — fallback.
- */
 export function useSharedSync() {
   const openTabs = ref(1)
   const theme = ref('light')
@@ -50,9 +45,7 @@ export function useSharedSync() {
   function handlePageHide() {
     try {
       worker?.port?.postMessage({ type: 'disconnect' })
-    } catch {
-      /* ignore */
-    }
+    } catch {}
   }
 
   onMounted(() => {
@@ -63,9 +56,7 @@ export function useSharedSync() {
         if (stored === 'dark' || stored === 'light') {
           theme.value = stored
         }
-      } catch {
-        /* ignore */
-      }
+      } catch {}
       applyThemeToDocument(theme.value)
       return
     }
@@ -82,9 +73,7 @@ export function useSharedSync() {
         if (stored === 'dark' || stored === 'light') {
           theme.value = stored
         }
-      } catch {
-        /* ignore */
-      }
+      } catch {}
       applyThemeToDocument(theme.value)
       return
     }
@@ -97,9 +86,7 @@ export function useSharedSync() {
     handlePageHide()
     try {
       worker?.port?.removeEventListener('message', onWorkerMessage)
-    } catch {
-      /* ignore */
-    }
+    } catch {}
   })
 
   return {

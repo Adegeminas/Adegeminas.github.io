@@ -22,7 +22,6 @@ self.onconnect = (event) => {
   ports.add(port)
   port.start()
 
-  // Всем вкладкам — иначе старые остаются со старым числом
   broadcastTabs()
   port.postMessage({ type: 'theme', value: theme })
 
