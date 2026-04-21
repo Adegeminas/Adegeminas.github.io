@@ -1,10 +1,10 @@
-# Деплой на GitHub Pages (Settings → Pages → Source: GitHub Actions).
-#
 # Репозиторий: https://github.com/Adegeminas/Arlight-test
-# Сайт после деплоя: https://adegeminas.github.io/Arlight-test/
+# После деплоя: https://adegeminas.github.io/Arlight-test/
 #
-# VITE_BASE_PATH берётся из имени репозитория (= /Arlight-test/).
-# Исключение: репозиторий USERNAME.github.io — задайте VITE_BASE_PATH: '/'
+# Settings → Pages → Source: GitHub Actions.
+# VITE_BASE_PATH = /имя-репо/ (здесь /Arlight-test/) — задаётся автоматически.
+#
+# Репозиторий USERNAME.github.io (сайт в корне): замените env на VITE_BASE_PATH: '/'
 
 name: Deploy to GitHub Pages
 
@@ -40,7 +40,6 @@ jobs:
 
       - name: Build
         env:
-          # Имя репозитория → путь на Pages; для USERNAME.github.io замените на '/'
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
         run: npm run build
 

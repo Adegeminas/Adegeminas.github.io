@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// GitHub Pages (project site): /REPO_NAME/
-// Локально и для user site: оставьте '/' или задайте VITE_BASE_PATH при сборке
+// GitHub Pages: https://adegeminas.github.io/Arlight-test/ → base /Arlight-test/
+// Локально: '/' или npm run preview:pages
 const base = process.env.VITE_BASE_PATH ?? '/'
 
 export default defineConfig({
