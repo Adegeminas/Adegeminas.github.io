@@ -5,8 +5,8 @@
 # НЕ используйте "Deploy from a branch" с папкой / (корень репо): тогда отдаётся
 # исходный index.html + src/main.js → в консоли "Failed to resolve module specifier vue".
 # Нужен артефакт сборки (папка dist после npm run build).
-#
-# USERNAME.github.io (сайт в корне домена): в Build env задайте VITE_BASE_PATH: '/'
+# В vite.config.js base по умолчанию './' — иначе при ошибочном '/' бандл запрашивает /assets/…
+# с корня домена → 404 HTML → MIME type text/html для module script.
 
 name: Deploy to GitHub Pages
 
@@ -41,8 +41,6 @@ jobs:
         run: npm ci
 
       - name: Build
-        env:
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
         run: npm run build
 
       - name: Upload artifact
